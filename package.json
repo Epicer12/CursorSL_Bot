@@ -1,0 +1,20 @@
+{
+  "name": "cursorsl-bot",
+  "version": "1.0.0",
+  "description": "Cursor Community Sri Lanka Discord bot",
+  "main": "src/bot.js",
+  "scripts": {
+    "start": "node src/bot.js",
+    "dev": "node src/bot.js",
+    "check": "node --check src/bot.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.25.1",
+    "dotenv": "^16.4.5",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
+  }
+}
