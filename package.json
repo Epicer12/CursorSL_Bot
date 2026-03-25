@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/bot.js",
     "dev": "node src/bot.js",
-    "check": "node --check src/bot.js"
+    "check": "node --check src/bot.js cogs/*.js",
+    "lint": "eslint ."
   },
   "engines": {
     "node": ">=20.0.0"
@@ -16,5 +17,11 @@
     "dotenv": "^16.4.5",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.1"
   }
 }

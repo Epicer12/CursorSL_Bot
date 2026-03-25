@@ -15,7 +15,7 @@ async function loadCogs({ cogsDir, context, logger }) {
 
   for (const filePath of cogFiles) {
     try {
-      // eslint-disable-next-line global-require, import/no-dynamic-require
+      // eslint-disable-next-line no-undef
       const cog = require(filePath);
       if (!cog || !cog.name || typeof cog.setup !== "function") {
         throw new Error("Invalid cog contract: expected { name, setup }");

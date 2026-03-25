@@ -1,10 +1,5 @@
 const path = require("node:path");
-const {
-  Client,
-  GatewayIntentBits,
-  Collection,
-  Events,
-} = require("discord.js");
+const { Client, GatewayIntentBits, Collection, Events } = require("discord.js");
 
 const config = require("../config");
 const { createLogger } = require("./utils/logger");
@@ -49,7 +44,10 @@ async function main() {
   client.once(Events.ClientReady, async (readyClient) => {
     try {
       if (config.guildId) {
-        await readyClient.application.commands.set(slashCommandBuilders, config.guildId);
+        await readyClient.application.commands.set(
+          slashCommandBuilders,
+          config.guildId,
+        );
         logger.info("Slash commands registered to guild", {
           guildId: config.guildId,
           count: slashCommandBuilders.length,
@@ -61,7 +59,9 @@ async function main() {
         });
       }
     } catch (error) {
-      logger.error("Failed slash command registration", { error: error.message });
+      logger.error("Failed slash command registration", {
+        error: error.message,
+      });
     }
 
     logger.info("Bot started", {
@@ -118,7 +118,10 @@ async function main() {
     try {
       await command.prefixExecute({ message, args }, botContext);
     } catch (error) {
-      logger.error("Prefix command failed", { command: commandName, error: error.message });
+      logger.error("Prefix command failed", {
+        command: commandName,
+        error: error.message,
+      });
       await message.reply("Something went wrong while running that command.");
     }
   });
@@ -146,6 +149,12 @@ async function main() {
 
 main().catch((error) => {
   // eslint-disable-next-line no-console
-  console.error(JSON.stringify({ level: "error", msg: "Fatal startup error", error: error.message }));
+  console.error(
+    JSON.stringify({
+      level: "error",
+      msg: "Fatal startup error",
+      error: error.message,
+    }),
+  );
   process.exit(1);
 });

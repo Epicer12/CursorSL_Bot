@@ -22,13 +22,16 @@ function createLogger(level = "info") {
 
     const serialized = JSON.stringify(payload);
     if (logLevel === "error") {
+      // eslint-disable-next-line no-console
       console.error(serialized);
       return;
     }
     if (logLevel === "warn") {
+      // eslint-disable-next-line no-console
       console.warn(serialized);
       return;
     }
+    // eslint-disable-next-line no-console
     console.log(serialized);
   }
 

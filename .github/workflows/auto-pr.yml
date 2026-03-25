@@ -1,0 +1,24 @@
+name: Auto Pull Request
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - dev
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create Pull Request
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: "" # If blank, use the branch that pushed
+          destination_branch: "dev"
+          pr_title: "Pull Request: ${{ github.ref_name }}"
+          pr_body: "An automated Pull Request created for branch `${{ github.ref_name }}`. Please fill out the PR structure below."
+          pr_template: ".github/pull_request_template.md"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
