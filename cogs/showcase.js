@@ -1,9 +1,9 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
-const shipCommand = {
-  name: "ship",
+const showcaseCommand = {
+  name: "showcase",
   slashData: new SlashCommandBuilder()
-    .setName("ship")
+    .setName("showcase")
     .setDescription("Ship your project to the community showcase!")
     .addStringOption((option) =>
       option
@@ -45,6 +45,20 @@ const shipCommand = {
         ephemeral: true,
       });
       return;
+    }
+
+    // Enforce one-time submission rule
+    const existing = await db.get(
+      "SELECT id FROM build_submissions WHERE user_id = ? AND (link = ? OR title = ?)",
+      [userId, link, title],
+    );
+
+    if (existing) {
+      return interaction.reply({
+        content:
+          "❌ You have already showcased this project! Each product can only be shipped to the community showcase once.",
+        ephemeral: true,
+      });
     }
 
     try {
@@ -114,7 +128,7 @@ const shipCommand = {
 
 module.exports = {
   name: "showcase",
-  commands: [shipCommand],
+  commands: [showcaseCommand],
   async setup({ logger }) {
     logger.info("Showcase cog setup complete");
   },
